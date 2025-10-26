@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useForm, type UseFormHandleSubmit, type UseFormRegister, type FieldErrors } from "react-hook-form";
 import type { Book } from "../interfaces/books/Book";
-import type { BookForm } from "../types/BookForm";
+import type { BookForm } from "../type/BookForm";
 
 export function useEditBookForm(
   editingBook: Book | null,

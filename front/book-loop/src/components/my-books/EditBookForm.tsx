@@ -1,6 +1,6 @@
 import type { FunctionComponent } from "react";
 import type { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
-import type { BookForm } from "../../types/BookForm";
+import type { BookForm } from "../../type/BookForm";
 
 type Dict = Record<string, string>;
 
