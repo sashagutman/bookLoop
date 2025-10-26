@@ -1,0 +1,71 @@
+name: Deploy Front to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Detect package manager
+        id: pm
+        working-directory: front/book-loop
+        run: |
+          if [ -f "pnpm-lock.yaml" ]; then echo "mgr=pnpm" >> $GITHUB_OUTPUT
+          elif [ -f "yarn.lock" ]; then echo "mgr=yarn" >> $GITHUB_OUTPUT
+          elif [ -f "package-lock.json" ]; then echo "mgr=npmci" >> $GITHUB_OUTPUT
+          else echo "mgr=npm" >> $GITHUB_OUTPUT; fi
+
+      - name: Install deps
+        working-directory: front/book-loop
+        run: |
+          if [ "${{ steps.pm.outputs.mgr }}" = "pnpm" ]; then pnpm i --frozen-lockfile; fi
+          if [ "${{ steps.pm.outputs.mgr }}" = "yarn" ]; then yarn install --frozen-lockfile; fi
+          if [ "${{ steps.pm.outputs.mgr }}" = "npmci" ]; then npm ci; fi
+          if [ "${{ steps.pm.outputs.mgr }}" = "npm" ]; then npm i; fi
+
+      - name: Build
+        working-directory: front/book-loop
+        run: npm run build || yarn build || pnpm build
+
+      # SPA fallback для BrowserRouter
+      - name: Create 404.html for SPA
+        run: cp front/book-loop/dist/index.html front/book-loop/dist/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: front/book-loop/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
