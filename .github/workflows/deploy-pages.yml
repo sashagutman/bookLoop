@@ -25,33 +25,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Detect package manager
-        id: pm
-        working-directory: front/book-loop
-        run: |
-          if [ -f "pnpm-lock.yaml" ]; then echo "mgr=pnpm" >> $GITHUB_OUTPUT
-          elif [ -f "yarn.lock" ]; then echo "mgr=yarn" >> $GITHUB_OUTPUT
-          elif [ -f "package-lock.json" ]; then echo "mgr=npmci" >> $GITHUB_OUTPUT
-          else echo "mgr=npm" >> $GITHUB_OUTPUT; fi
+          cache: 'npm'
+          cache-dependency-path: front/book-loop/package-lock.json
 
       - name: Install deps
         working-directory: front/book-loop
         run: |
-          if [ "${{ steps.pm.outputs.mgr }}" = "pnpm" ]; then pnpm i --frozen-lockfile; fi
-          if [ "${{ steps.pm.outputs.mgr }}" = "yarn" ]; then yarn install --frozen-lockfile; fi
-          if [ "${{ steps.pm.outputs.mgr }}" = "npmci" ]; then npm ci; fi
-          if [ "${{ steps.pm.outputs.mgr }}" = "npm" ]; then npm i; fi
+          if [ -f package-lock.json ]; then npm ci; else npm i; fi
 
       - name: Build
         working-directory: front/book-loop
-        run: npm run build || yarn build || pnpm build
+        run: npm run build
 
-      # SPA fallback для BrowserRouter
-      - name: Create 404.html for SPA
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # SPA fallback, чтобы прямые ссылки не падали на 404
+      - name: Add 404.html
         run: cp front/book-loop/dist/index.html front/book-loop/dist/404.html
 
       - name: Upload artifact
