@@ -1,13 +1,19 @@
+import type { Genre } from "../interfaces/Genre";
+import type { Language } from "../interfaces/Language";
+
 export type BookForm = {
   title: string;
   author: string;
-  language: string;
-  genre: string;
-  publishedYear?: string;
-  readYear?: string;
-  pages?: string;
-  rating?: string;
+  language: Language;
+  genre: Genre;
+
+  publishedYear?: number;
+  readYear?: number;
+  pages?: number;
+  rating?: number;
+
   image?: string;
+  imageAlt?: string;
   description?: string;
   notes?: string;
 };
