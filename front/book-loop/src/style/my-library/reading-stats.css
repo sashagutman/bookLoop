@@ -1,0 +1,77 @@
+.stats {
+    background-color: rgba(10, 16, 30, 0.9);
+    padding: clamp(3.125rem, 2.105rem + 5.1vw, 6.25rem) 0;
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stats-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    border: 1px solid rgb(51, 65, 85);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: min(190px, 100%);
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 2px 8px 0px;
+    border-radius: 10px;
+}
+
+.stat-card:hover .stat-icon {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 26px;
+    color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    transition: all 0.5s;
+}
+
+.icon-books {
+    background-color: rgb(37, 99, 235);
+}
+
+.icon-time{
+    background-color: rgb(217, 119, 6);
+}
+
+.icon-finished {
+    background-color: rgb(22, 163, 74);
+}
+
+.icon-favorites {
+    background-color: rgb(220, 38, 38);
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+    margin: 10px 0;
+}
+
+.stat-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(226, 232, 240);
+}
+
+.stat-sub {
+    font-size: 13px;
+    color: rgb(148, 163, 184);
+}

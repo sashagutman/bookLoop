@@ -1,0 +1,1 @@
+export type Status = "reading" | "unread" | "finished";

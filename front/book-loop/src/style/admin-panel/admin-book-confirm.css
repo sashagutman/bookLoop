@@ -1,0 +1,81 @@
+.bookc {
+  display: grid;
+  gap: 14px;
+}
+
+.bookc-top {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.bookc-cover {
+  width: 140px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgb(243, 244, 246);
+}
+.bookc-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookc-meta {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.bookc-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+}
+.bookc-row dt {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: lightseagreen;
+}
+.bookc-row dd {
+  font-size: 14px;
+}
+
+.bookc-block {
+  background-color: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.bookc-block-title {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.bookc-text {
+  white-space: pre-wrap;
+  line-height: 1.45;
+  font-size: 14px;
+}
+
+.bookc-footer {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+}
+.bookc-id { 
+    display: flex; 
+    gap: 8px; 
+    align-items: baseline; 
+}
+.bookc-inline { 
+    display: flex; 
+    gap: 16px; 
+    flex-wrap: wrap; 
+}
+
+@media (max-width: 600px) {
+  .bookc-top { grid-template-columns: 1fr; }
+  .bookc-cover { width: 160px; height: 210px; }
+  .bookc-row { grid-template-columns: 1fr; }
+}

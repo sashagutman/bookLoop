@@ -1,0 +1,169 @@
+.auth-page {
+    padding: 70px 0;
+}
+
+.auth-card {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.auth-card_inner {
+    background-color: rgb(31, 41, 55);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    border: 1px solid rgb(55, 65, 81);
+    border-radius: 10px;
+}
+
+.auth-card_body {
+    padding: 40px;
+}
+
+.auth-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+}
+
+.auth-subtitle {
+    margin-top: 12px;
+    text-align: center;
+    color: rgb(156, 163, 175);
+}
+
+.auth-form {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid rgb(55, 65, 81);
+    background-color: rgb(55, 65, 81);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.form-input:hover {
+    background-color: rgb(66, 77, 94);
+}
+
+.form-input:focus {
+    border-color: rgb(99, 102, 241);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4);
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgb(156, 163, 175);
+}
+
+.btn-submit {
+    letter-spacing: 1px;
+    width: 100%;
+    margin-top: 40px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background-color: rgb(99, 102, 241);
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background-color: rgb(79, 70, 229);
+}
+
+.btn-submit:focus {
+    outline: 2px solid rgb(99, 102, 241);
+    outline-offset: 2px;
+}
+
+.auth-footer {
+    background: #374151;
+    padding: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: rgb(156, 163, 175);
+}
+
+.auth-footer a {
+    margin-left: 6px;
+    color: rgb(99, 102, 241);
+    transition: color 0.2s;
+}
+
+.auth-footer a:hover {
+    color: rgb(129, 140, 248);
+}
+
+/* register */
+.register-card {
+  max-width: 700px;
+}
+
+.form-row-3,
+.form-row-2 {
+  display: grid;
+  gap: 12px;
+}
+
+/* 3 поля в ряд на широких экранах */
+.form-row-3 { grid-template-columns: repeat(3, 1fr); }
+/* 2 поля в ряд */
+.form-row-2 { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 900px) {
+  .form-row-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .form-row-3,
+  .form-row-2 { grid-template-columns: 1fr; }
+}
+
+/* formik field errors */
+.field-error {
+  color: rgb(234, 15, 23);  
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.form-input.input-error {
+  border-color: rgb(229, 72, 77);
+  background-color: rgba(229, 72, 77, 0.06);
+}
+
+.form-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 72, 77, 0.35);
+  color: rgb(180, 35, 42);
+  font-size: 14px;
+    background: #fee2e2;
+
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

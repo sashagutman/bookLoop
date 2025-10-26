@@ -1,0 +1,61 @@
+.admin-sidebar {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  padding: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, .06);
+  box-shadow: rgba(150, 150, 150, 0.08) 0px 4px 12px;
+}
+
+.admin-nav {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+
+}
+
+.admin-nav a {
+  position: relative;
+  display: block;
+  padding: 10px 12px 10px 44px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all .15s ease;
+}
+
+.admin-nav a::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgb(106, 167, 255), rgb(139, 92, 246));
+}
+
+.admin-nav a:hover {
+  background-color: rgba(255, 255, 255, .03);
+  border-color: rgba(255, 255, 255, .06);
+}
+
+.admin-nav a:active {
+  background: rgba(255, 255, 255, .06);
+  transform: scale(0.9);
+}
+
+@media (max-width: 1024px) {
+  .admin-nav {
+    display: flex;
+    gap: 8px;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    position:initial;
+  }
+}

@@ -1,0 +1,169 @@
+.burger-icon { 
+    display: none; 
+    position: relative; 
+    z-index: 40;
+ }
+
+.burger {
+  width: 40px; 
+  height: 40px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  user-select: none; 
+  transition: 300ms; 
+  border-radius: 5px; 
+  background-color: #ffffff;
+  cursor: pointer;
+  position: relative;
+  z-index: 40;
+}
+
+.burger input[type="checkbox"] {
+  appearance: none;
+  transition: 300ms;
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+  transition: 300ms;
+  transform-origin: center center;
+}
+
+.burger::before {
+  transform: translateY(8px);
+}
+
+.burger::after {
+  transform: translateY(-8px);
+}
+
+.burger .line,
+.burger::before,
+.burger::after {
+  width: 25px;
+  height: 3px;
+  display: block;
+  background-color: black;
+  border-radius: 5px;
+  position: absolute;
+}
+
+.burger .line:checked { 
+    width: 0; 
+    transition-delay: 100ms; 
+}
+
+.burger:has(.line:checked)::before {
+    animation: animation1 400ms ease-out 0s 1 both;
+}
+.burger:has(.line:checked)::after  {
+    animation: animation2 400ms ease-out 0s 1 both;
+}
+.burger:hover {
+    background-color: rgb(43, 48, 59);
+}
+.burger:hover .line,
+.burger:hover::before,
+.burger:hover::after {
+    background: #e8e8e8;
+}
+.burger:active {
+    scale: 0.95;
+}
+@keyframes animation1 {
+    0% {
+        transform: translateY(8px) rotate(0);
+    }
+    50% {
+        transform: translateY(0) rotate(0);
+    }
+    100% {
+        transform: translateY(0) rotate(45deg);
+    }
+}
+@keyframes animation2 {
+    0% {
+        transform: translateY(-8px) rotate(0);
+    }
+    50% {
+        transform: translateY(0) rotate(0);
+    }
+    100% {
+        transform: translateY(0) rotate(-45deg);
+    }
+}
+
+.mobile-overlay {
+  position: fixed; inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(2px);
+  opacity: 0; 
+  pointer-events: none; 
+  transition: opacity .25s ease;
+  z-index: 30;
+}
+
+/* панель */
+.mobile-menu {
+  position: fixed; right: 0; top: 0; height: 100dvh; width: 84vw; max-width: 360px;
+  background-color: rgb(11, 19, 38);
+  border-left: 2px solid rgba(255,255,255,.08);
+  transform: translateX(100%); transition: transform .28s ease;
+  z-index: 35; 
+  padding: 45px 10px;
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px;
+  overflow-y: auto;     
+  -webkit-overflow-scrolling: touch;
+}
+
+/* контент меню */
+.mobile-menu_list { 
+    padding: 12px 4px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+.mobile-menu_list a {
+  display: block; 
+  padding: 10px 12px; 
+  border-radius: 8px;
+  color: #e5e7eb;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.mobile-menu_list a:hover { 
+    background: rgba(170,170,170,.08); 
+    color: rgb(255, 255, 255); 
+}
+
+.mobile-menu_actions { 
+    display: flex; 
+    flex-direction: column;
+    gap: 8px; 
+}
+.mobile-menu_actions ._btn {
+  text-align: center; padding: 10px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); color: #fff;
+}
+.mobile-menu_actions ._btn:hover { background: rgba(255,255,255,.12); }
+
+/* Открытие через чекбокс */
+.burger-icon:has(.line:checked) .mobile-overlay { opacity: 1; pointer-events: auto; }
+.burger-icon:has(.line:checked) .mobile-menu { transform: translateX(0); }
+
+body.dark .mobile-menu {
+  background: #ffffff;
+  border-left: 1px solid rgba(2,6,23,.08);
+}
+body.dark .mobile-menu_list a { color: rgb(31, 41, 55); }
+body.dark .mobile-menu_list a:hover { background: rgba(2,6,23,.06); color: rgb(11, 19, 38); }
+body.dark .mobile-menu_actions ._btn { background: rgba(2,6,23,.04); border-color: rgba(2,6,23,.12); color: #0b1326; }
+body.dark .mobile-menu_actions ._btn:hover { background: rgba(2,6,23,.08); }
+
+@media (max-width: 968px) {
+  .burger-icon { display: block; }
+}

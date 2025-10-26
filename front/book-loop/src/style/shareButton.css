@@ -1,0 +1,77 @@
+.share-wrap {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  border-radius: 9999px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transition: width 280ms ease;
+  width: 44px;
+}
+
+.share-wrap.open {
+  width: 180px; 
+}
+
+/* триггер-кнопка (круг) */
+.share-trigger {
+  width: 44px;  
+  height: 44px;
+  border: 0;
+  color: rgb(0, 128, 0);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.share-icon {
+  font-size: 20px;
+  transition: transform 200ms ease;
+}
+
+/* блок экшенов */
+.share-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;            
+  padding-inline: 8px; 
+  height: 100%;
+  pointer-events: none;
+}
+
+/* открыли — включаем клики */
+.share-wrap.open .share-actions {
+  pointer-events: auto;
+}
+
+/* кнопки действий */
+.share-action-btn {
+  display: grid;
+  place-items: center;
+  width: 32px;  
+  height: 32px; 
+  background: transparent;
+  color: rgb(0, 128, 0);
+  border-radius: 9999px;
+  transform: scale(0);
+  transition: transform 220ms ease, background-color 180ms ease;
+}
+
+.share-action-btn:hover {
+  background: rgba(0, 128, 0, 0.08);
+}
+
+.share-wrap.open .share-action-btn {
+  transform: scale(1);
+}
+
+/* ступенька появления */
+.share-wrap.open .share-action-btn:nth-child(1) { transition-delay: 40ms; }
+.share-wrap.open .share-action-btn:nth-child(2) { transition-delay: 80ms; }
+.share-wrap.open .share-action-btn:nth-child(3) { transition-delay: 120ms; }
+.share-wrap.open .share-action-btn:nth-child(4) { transition-delay: 160ms; }

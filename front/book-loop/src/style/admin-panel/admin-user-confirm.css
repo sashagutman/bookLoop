@@ -1,0 +1,122 @@
+.user-confirm {
+  position: relative;
+  display: inline-block;
+}
+
+/* Бэкдроп */
+.uc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 1000;
+}
+
+.uc-dialog {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: transform .18s ease, opacity .18s ease;
+  overflow: hidden;
+}
+
+.uc-card {
+  width: min(760px, 100%);
+  max-height: min(90vh, calc(100dvh - 48px));
+  background-color: rgb(80, 87, 102);
+  color: rgb(229, 231, 235);
+  border-radius: 20px;
+  overflow: auto;                     
+  -webkit-overflow-scrolling: touch; 
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+}
+
+.user-confirm.is-open .uc-backdrop { opacity: 1; pointer-events: auto; }
+.user-confirm.is-open .uc-dialog   { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+.uc-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 22px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  position: sticky; top: 0; z-index: 1;
+  background-color: rgb(80, 87, 102);
+}
+.uc-title { 
+    margin: 0; 
+    font-size: 18px; 
+    font-weight: 700; 
+}
+.uc-role { 
+    padding: 3px 10px; 
+    border-radius: 10px; 
+}
+.uc-role.user  { 
+    background: rgb(236, 254, 255); 
+    color: rgb(21, 94, 117); 
+}
+.uc-role.admin { 
+    background: rgb(254, 226, 226); 
+    color: rgb(153, 27, 27); 
+}
+
+.uc-actions {
+  display:flex; justify-content:flex-end; gap:10px;
+  padding:16px 22px;
+  border-top:1px solid rgba(0,0,0,.08);
+  border-radius: 0 0 20px 20px;
+  position: sticky; bottom: 0; z-index: 1;
+  background-color: rgb(80, 87, 102);
+}
+.uc-btn { appearance:none; border:0; border-radius:6px; padding:6px 10px; cursor:pointer; }
+.uc-btn-cancel { background:#fff; color:#000; border:1px solid #3b3b3b; }
+
+.uc-body {
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:18px;
+  padding:18px 22px;
+  min-height: 0;
+}
+
+.uc-avatar {
+  width:160px; 
+  height:160px;
+  border-radius:16px; 
+  overflow:hidden;
+}
+.uc-avatar img { width:100%; height:100%; object-fit:cover; }
+
+/* Информация */
+.uc-info { 
+    display:grid; 
+    gap:10px; 
+}
+.uc-row { 
+    display:grid; 
+    grid-template-columns:140px 1fr; 
+    gap:8px; 
+    align-items:center; 
+}
+.uc-label { 
+    font-size:12px; 
+    text-transform:uppercase; 
+    color: lightseagreen; 
+    font-weight: 600; 
+}
+.uc-value { 
+    font-size:14px; 
+}
+
+/* Адаптив */
+@media (max-width: 560px) {
+  .uc-body { grid-template-columns: 1fr; }
+  .uc-row  { grid-template-columns: 1fr; }
+}

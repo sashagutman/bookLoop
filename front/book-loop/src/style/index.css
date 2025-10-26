@@ -1,0 +1,97 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    color: inherit;
+}
+
+html,
+body {
+    font-family: var(--font-ui);
+    line-height: 1.65;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ссылки */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Списки */
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Формы */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Изображения и медиа */
+img,
+picture,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Таблицы */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+:root {
+    --font-ui: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+}
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+.content {
+    flex-grow: 1;
+}

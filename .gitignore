@@ -1,0 +1,52 @@
+# ==== OS ====
+.DS_Store
+Thumbs.db
+
+# ==== Editors ====
+.vscode/
+.idea/
+
+# ==== Env & secrets ====
+.env
+*.env
+*.env.local
+
+# локальные env внутри пакетов
+front/.env
+front/.env.local
+backend/.env
+backend/.env.local
+
+# если хочешь коммитить front/.env.production для Pages — разрешаем:
+!front/.env.production
+
+# ==== Node ====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==== Build output ====
+dist/
+build/
+front/dist/
+backend/dist/
+backend/build/
+
+# ==== Coverage / test ====
+coverage/
+*.lcov
+.nyc_output/
+
+# ==== Caches ====
+.cache/
+.eslintcache
+.parcel-cache/
+vite.svg
+
+# ==== TypeScript ====
+*.tsbuildinfo
+
+# ==== Misc ====
+*.log
