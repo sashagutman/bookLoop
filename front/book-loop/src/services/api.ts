@@ -13,6 +13,10 @@ function withAuth(instance: ReturnType<typeof axios.create>) {
       cfg.headers.Authorization = `Bearer ${t}`;
       (cfg.headers as any)["x-auth-token"] = t; 
     }
+    // временно
+    if (cfg.data && typeof cfg.data === "object") {
+      console.log("[API] outgoing data:", cfg.method, cfg.url, cfg.data);
+    }
     return cfg;
   });
   return instance;

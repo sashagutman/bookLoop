@@ -18,7 +18,7 @@ export function useAdminBooks() {
   const [editId, setEditId] = useState<string | null>(null);
   const viewed = useMemo(() => books.find(b => b._id === viewId) ?? null, [books, viewId]);
   const editingBook = useMemo(() => books.find(b => b._id === editId) ?? null, [books, editId]);
-
+  
   useEffect(() => {
     let ignore = false;
     (async () => {
@@ -42,7 +42,9 @@ export function useAdminBooks() {
         if (!ignore) setIsLoading(false);
       }
     })();
-    return () => { ignore = true; };
+    return () => {
+      ignore = true;
+    };
   }, [navigate]);
 
   async function handleDelete(book: Book) {
@@ -67,41 +69,78 @@ export function useAdminBooks() {
     }
   }
 
+  //helpers
+  const toNumUndef = (v: unknown): number | undefined => {
+    if (v === null || v === undefined || v === "") return undefined;
+    const n = typeof v === "string" ? Number(v) : (v as number);
+    return Number.isFinite(n) ? n : undefined;
+  };
+
+  // image всегда превращается в строку url
+  const normalizeImage = (img: unknown): string => {
+    const s =
+      typeof img === "string"
+        ? img.trim()
+        : (img as any)?.url && typeof (img as any).url === "string"
+        ? String((img as any).url).trim()
+        : "";
+    return s;
+  };
+
   async function saveEditedBook(id: string, patch: Partial<Book>) {
     const base = books.find(b => b._id === id);
     if (!base) {
       toast.error("Book not found");
       return false;
     }
-
-    // обязательные поля CreateBookPayload
-    const title = patch.title ?? base.title;
-    const author = patch.author ?? base.author;
+    // обязательные поля
+    const title = (patch.title ?? base.title)?.trim();
+    const author = (patch.author ?? base.author)?.trim();
     const language = (patch.language ?? base.language) as Language;
     const genre = (patch.genre ?? base.genre) as Genre;
 
-    // publishedYear обязателен и number
+    const pubRaw = patch.publishedYear ?? base.publishedYear;
     const publishedYear =
-      typeof patch.publishedYear === "number" ? patch.publishedYear : base.publishedYear;
+      typeof pubRaw === "string" ? Number(pubRaw) : pubRaw;
 
-    if (!title || !author || !language || !genre || typeof publishedYear !== "number") {
+    if (
+      !title ||
+      !author ||
+      !language ||
+      !genre ||
+      typeof publishedYear !== "number" ||
+      !Number.isFinite(publishedYear)
+    ) {
       toast.error("Please fill required fields (title, author, language, genre, publishedYear)");
       return false;
     }
 
-    const payload: CreateBookPayload = {
+    // опциональные поля
+    const readYear = toNumUndef(patch.readYear ?? base.readYear);
+    const pages = toNumUndef(patch.pages ?? base.pages);
+    const rating = toNumUndef(patch.rating ?? base.rating);
+
+    const image = normalizeImage(patch.image ?? base.image);
+    const description = ((patch.description ?? base.description) ?? "").toString().trim();
+    const notes = ((patch.notes ?? base.notes) ?? "").toString().trim();
+
+    const basePayload = {
       title,
       author,
       language,
       genre,
       publishedYear,
-      readYear: (patch.readYear ?? base.readYear) ?? null,
-      description: patch.description ?? base.description ?? "",
-      pages: (patch.pages ?? base.pages) ?? null,
-      image: patch.image ?? base.image ?? "",
-      rating: (patch.rating ?? base.rating) ?? null,
-      notes: patch.notes ?? base.notes ?? "",
+      image,       
+      description,  
+      notes,     
     };
+
+    const payload: CreateBookPayload = {
+      ...basePayload,
+      ...(readYear !== undefined ? { readYear } : {}),
+      ...(pages !== undefined ? { pages } : {}),
+      ...(rating !== undefined ? { rating } : {}),
+    } as CreateBookPayload;
 
     try {
       const { data: updated } = await updateBookById(id, payload);
@@ -110,15 +149,27 @@ export function useAdminBooks() {
       toast.success("Book updated");
       return true;
     } catch (e: any) {
+      const msg =
+        e?.response?.data?.message ||
+        e?.response?.data?.error ||
+        e?.message ||
+        "Failed to update";
+      toast.error(msg);
       if (e?.response?.status === 401) navigate("/login", { replace: true });
       return false;
     }
   }
 
   return {
-    books, isLoading,
-    viewId, setViewId, viewed,
-    editId, setEditId, editingBook,
-    handleDelete, saveEditedBook,
+    books,
+    isLoading,
+    viewId,
+    setViewId,
+    viewed,
+    editId,
+    setEditId,
+    editingBook,
+    handleDelete,
+    saveEditedBook,
   };
 }

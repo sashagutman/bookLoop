@@ -157,11 +157,12 @@ router.get("/:id", async (req, res) => {
     return res.status(200).json(book);
   } catch (error) { return handleError(res, 400, error.message || "Bad request"); }
 });
-
+// update
 router.put("/:id", auth, ownerOrAdmin(Book), async (req, res) => {
   if (req.body && typeof req.body.language !== "undefined") {
     req.body.language = normalizeLanguage(req.body.language);
   }
+  
   const msg = bookValidation(req.body);
   if (msg) return res.status(400).json(createError("Validation", msg, 400));
 

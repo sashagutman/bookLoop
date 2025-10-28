@@ -1,103 +1,135 @@
-Book Loop
+# Book Loop
 
-Book Loop is a web application for tracking reading and managing a personal library.
-The project is built using React + TypeScript + Vite and connects to a Node.js/Express/MongoDB API.
+A full‑stack web app for tracking reading and managing a personal library.
 
-Features:
-Favorites and “Want to read”
-Book statuses: to-read, reading, finished
-Ratings and notes for books
-Search and filters (title, author, language, genre, year)
-User registration and authentication
-Role-based access control (admin / user)
-Responsive design (mobile-friendly)
-API integration with server-side data persistence
-Tech Stack:
-React + TypeScript
-React Router
-Axios
-Vite
-Node.js + Express + MongoDB/Mongoose
-Joi (validation)
-JWT (for authentication)
-Getting Started (Monorepo: client + server):
+**Frontend:** React + TypeScript + Vite · React Router · Axios  
+**Backend:** Node.js + Express + MongoDB/Mongoose · JWT · Joi
 
-1. Clone the repository
-git clone <your-repo-url>
-cd book-loop
+---
 
-2. Start the backend
-cd server
-cp .env.example .env
+## Repository Structure
+book-loop/
+   front/book-loop/   # React + Vite + TypeScript (client)
+   backend/           # Express + MongoDB (server)
+
+## Prerequisites
+- Node.js LTS (18+ recommended)
+- MongoDB (local Compass **or** Atlas)
+
+## Quick Start (Local)
+
+### 1) Backend
+   bash
+cd backend
+cp .env.example .env    # copy the template
+# open .env and set your Mongo URI and JWT secret if needed
 npm install
-npm run dev
+npm run dev             # API at http://localhost:5566
 
-3. Start the frontend
-cd ../client
-cp .env.example .env
-npm install
-npm run dev
+**`backend/.env.example`** (already provided):
+   dotenv
+# === Security / Auth ===
+JWT_SECRET=random_secret
+JWT_EXPIRES_IN=1h
 
-Environment Variables:
-client/.env
-VITE_BOOKS_API_URL=http://localhost:5566/api/books
-VITE_USERS_API_URL=http://localhost:5566/api/users
-
-server/.env
+# === Server ===
 PORT=5566
 NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/bookloop
-JWT_SECRET=change_me
+
+# === Database ===
+# Local MongoDB (from your env):
+MONGODB_URI=mongodb://127.0.0.1:27017/fullstack-library
+
+# MongoDB Atlas (template — replace with your own credentials/cluster/db):
+# MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>/<db>?retryWrites=true&w=majority&appName=<appName>
+
+# === Misc / toggles ===
+DB=MONGODB
+LOGGER=morgan
+VALIDATOR=Joi
+
+# === CORS for local dev (frontend URL) ===
 CORS_ORIGIN=http://localhost:5173
 
-Scripts:
-client
-npm run dev // start dev server
-npm run build // production build
-npm run preview // preview production build
-server
-npm run dev // development (nodemon/ts-node-dev)
-npm run start // production
-npm run lint // optional linter
-npm run seed // optional seed demo data
 
-Backend (Server):
-The backend provides a REST API for authentication, users, and books.
-Built with Node.js + Express + MongoDB/Mongoose and JWT authentication.
-Prerequisites:
-Node.js LTS
-MongoDB (local or Atlas)
-API Overview (base URL: http://localhost:5566/api):
+**Backend scripts (package.json):**
+- `npm run dev` → development (nodemon)
+- `npm start` → `node app.js` (production style)
 
-Auth
-POST /auth/register — create account
-POST /auth/login — returns JWT
-Users
-GET /users/me — get current user
-PATCH /users/me — update profile
-PATCH /users/me/password — change password
-(optional) PATCH /users/me/bio — { text, lang, visibility }
-Books
-GET /books — list with filters (?q=&genre=&lang=&page=&limit=)
-GET /books/:id — get by id
-POST /books — create (auth)
-PATCH /books/:id — update (owner/admin)
-DELETE /books/:id — delete (owner/admin)
-PATCH /books/:id/like — toggle favorite
-PATCH /books/:id/want — toggle “want to read”
-PATCH /books/:id/status — set { status: "to-read" | "reading" | "finished" }
-GET /books/my-books — current user’s books with status filters
+---
 
-Auth Header:
-Use either header
+### 2) Frontend
+   bash
+cd front/book-loop
+cp .env.example .env    # usually fine for local dev
+npm install
+npm run dev             # http://localhost:5173
+ 
+
+**`front/book-loop/.env.example`** (already provided):
+   dotenv
+VITE_USERS_API_URL=http://localhost:5566/api/users
+VITE_BOOKS_API_URL=http://localhost:5566/api/books
+  
+
+ The client reads these URLs and attaches JWT from storage to requests.
+
+---
+
+ ## Admin Access (for reviewer)
+
+The app includes an Admin Panel. To quickly test it locally, you can manually grant admin rights to **any** user via MongoDB Compass (or Atlas Data Explorer):
+
+### Option A — MongoDB Compass (local)
+1. Open **MongoDB Compass** and connect to your local DB (URI from `backend/.env` → `MONGODB_URI`).
+2. Go to your database → the **`users`** collection.
+3. Find your test user (search by `email`).
+4. Open the document and set:
+     json
+   "isAdmin": true
+
+---
+
+## Features
+- Favorites & “Want to read”
+- Book statuses: `to-read`, `reading`, `finished`
+- Ratings and notes
+- Search & filters (title, author, language, genre, year)
+- User registration & authentication
+- Role-based access (admin / user)
+- Responsive layout
+- REST API with persistence
+
+## REST API (Brief)
+**Base URL:** `http://localhost:5566/api`
+
+**Auth**
+- `POST /auth/register`
+- `POST /auth/login` - JWT
+
+**Users**
+- `GET /users/me`
+- `PATCH /users/me`
+- `PATCH /users/me/password`
+
+**Books**
+- `GET /books?q=&genre=&lang=&page=&limit=`
+- `GET /books/:id`
+- `POST /books` *(auth)*
+- `PATCH /books/:id`
+- `DELETE /books/:id`
+- `PATCH /books/:id/like`
+- `PATCH /books/:id/want`
+- `PATCH /books/:id/status` `{ status: "to-read" | "reading" | "finished" }`
+- `GET /books/my-books` *(filters: favorites / want / status)*
+
+**Auth Headers**
+
 Authorization: Bearer <token>
+# or
 x-auth-token: <token>
 
-Error Format (example):
-{ "error": "Invalid or expired token" }
-
-Notes:
-Forms/validation can be implemented with Formik/Yup or React Hook Form/Yup.
-Axios instance should read VITE_* env variables and attach JWT from storage.
-Pagination is synced with URL query params (?page=).
-Internationalization and RTL (Hebrew) can be handled via locale and direction toggles.
+## Notes
+- **Do not commit** real `.env` files — use `*.env.example` templates.
+- Keep DB credentials in env only.
+- For a static demo (frontend only) you can deploy to GitHub Pages. For full stack, deploy backend to a PaaS (Render/Railway) and point `VITE_*_API_URL` to it.

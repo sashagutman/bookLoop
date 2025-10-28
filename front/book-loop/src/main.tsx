@@ -9,7 +9,7 @@ const root = createRoot(document.getElementById("root")!);
 
 root.render(
   <StrictMode>
-    <BrowserRouter basename={"/bookLoop"}>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
         <App />
       </AuthProvider>

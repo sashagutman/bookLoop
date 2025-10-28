@@ -130,9 +130,6 @@
 /* 2 поля в ряд */
 .form-row-2 { grid-template-columns: repeat(2, 1fr); }
 
-@media (max-width: 900px) {
-  .form-row-3 { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 640px) {
   .form-row-3,
   .form-row-2 { grid-template-columns: 1fr; }
@@ -158,12 +155,10 @@
   border: 1px solid rgba(229, 72, 77, 0.35);
   color: rgb(180, 35, 42);
   font-size: 14px;
-    background: #fee2e2;
-
+  background: rgb(254, 226, 226);
 }
 
 .btn-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-

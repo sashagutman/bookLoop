@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useForm, type UseFormHandleSubmit, type UseFormRegister, type FieldErrors } from "react-hook-form";
 import type { Book } from "../interfaces/books/Book";
-import type { BookForm } from "../type/BookForm";
+import type { BookForm } from "../interfaces/forms/BookForm";
 
 export function useEditBookForm(
   editingBook: Book | null,
@@ -25,13 +25,13 @@ export function useEditBookForm(
     reset({
       title: editingBook.title ?? "",
       author: editingBook.author ?? "",
-      language: String(editingBook.language ?? ""),
-      genre: String(editingBook.genre ?? ""),
+      language: (editingBook.language as any) ?? "",
+      genre: (editingBook.genre as any) ?? "",
       publishedYear: editingBook.publishedYear != null ? String(editingBook.publishedYear) : "",
       readYear: editingBook.readYear != null ? String(editingBook.readYear) : "",
       pages: editingBook.pages != null ? String(editingBook.pages) : "",
       rating: editingBook.rating != null ? String(editingBook.rating) : "",
-      image: editingBook.image ?? "",
+      image: (editingBook as any).image ?? "",
       description: editingBook.description ?? "",
       notes: editingBook.notes ?? "",
     });

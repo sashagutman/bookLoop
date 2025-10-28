@@ -1,17 +1,17 @@
 import type { FunctionComponent } from "react";
 import type { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
-import type { BookForm } from "../../type/BookForm";
-
-type Dict = Record<string, string>;
+import type { BookForm } from "../../interfaces/forms/BookForm";
+import type { Language } from "../../interfaces/Language";
+import type { Genre } from "../../interfaces/Genre";
 
 type Props = {
-  LANGS: Dict;
-  GENRES: Dict;
+  LANGS: Record<Language, string>;
+  GENRES: Record<Genre, string>;
   register: UseFormRegister<BookForm>;
   handleSubmit: UseFormHandleSubmit<BookForm>;
   errors: FieldErrors<BookForm>;
   isSubmitting: boolean;
-  onSubmit: (values: BookForm) => Promise<boolean>; 
+  onSubmit: (values: BookForm) => Promise<boolean>;
   onCancel: () => void;
 };
 

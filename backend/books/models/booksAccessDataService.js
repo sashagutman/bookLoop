@@ -77,7 +77,7 @@ const setUserStatus = async (bookId, userId, status) => {
     { new: true, runValidators: true }
   ).select("_id states");
 };
-
+// clear user status
 const clearUserStatus = async (bookId, userId) => {
   ensureMongo();
   const uid = new mongoose.Types.ObjectId(userId);
@@ -87,7 +87,7 @@ const clearUserStatus = async (bookId, userId) => {
     { new: true }
   ).select("_id states");
 };
-
+// get book by user status
 const getBooksByUserStatus = async (userId, status) => {
   ensureMongo();
   const uid = new mongoose.Types.ObjectId(userId);

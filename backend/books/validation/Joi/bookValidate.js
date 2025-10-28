@@ -27,7 +27,7 @@ const bookValidation = Joi.object({
   status: Joi.string().valid("reading", "unread", "finished"),
   image: Joi.string().uri().pattern(/^https?:\/\/.+/i).allow("", null),
   rating: Joi.number().min(0).max(5),
-  notes: Joi.string().allow("").max(3000),
+  notes: Joi.string().allow("").max(1000),
 }).min(1); // хотя бы одно поле обязательно
 
 module.exports = bookValidation;

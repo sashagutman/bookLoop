@@ -1,7 +1,8 @@
 import type { FunctionComponent } from "react";
 import Loading from "../Loading";
 import EditBookForm from "../../components/my-books/EditBookForm";
-import { useEditBook, type BookForm } from "../../hooks/useEditBook";
+import { useEditBook } from "../../hooks/useEditBook";
+import type { BookForm } from "../../interfaces/forms/BookForm";
 import type { Language } from "../../interfaces/Language";
 import type { Genre } from "../../interfaces/Genre";
 import type { Book } from "../../interfaces/books/Book";

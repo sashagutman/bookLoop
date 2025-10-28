@@ -15,7 +15,6 @@ const SideBar: FunctionComponent<SideBarProps> = () => {
                     <a href="#admin-dashboard" className="active">Dashboard</a>
                     <a href="#admin-users">Users</a>
                     <a href="#admin-books">Books</a>
-                    <a href="#admin-danger">Danger zone</a>
                 </nav>
             </aside>
         </>
