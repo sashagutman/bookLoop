@@ -1,12 +1,18 @@
-const cors = require('cors');
+const cors = require("cors");
 
-const corsMiddleware = cors ({
-    origin: [
-        "http://localhost:27017",
-        "http://localhost:5173",
-        "http://www.example.com",
-    ],
-    credentials: true,
-})
+// Можно задать CORS_ORIGIN через ENV: "https://front1.com,https://front2.com"
+const fromEnv = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map(s => s.trim())
+  .filter(Boolean);
 
-module.exports = corsMiddleware;
+const allowedOrigins = fromEnv.length ? fromEnv : [
+  "http://localhost:5173", // локальный фронт
+  // Добавь сюда свой фронт на Render после деплоя, например:
+  // "https://bookloop-staging.onrender.com",
+];
+
+module.exports = cors({
+  origin: allowedOrigins,
+  credentials: true,
+});

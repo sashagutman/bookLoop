@@ -1,12 +1,10 @@
-require("dotenv").config();
 const morganLogger = require("./morgan/morganLogger");
 
-const logger = process.env.LOGGER;
-
-const loggerMiddleware = () => {
-  if (logger === "morgan") {
+// безопасная фабрика: ВСЕГДА возвращает функцию
+module.exports = () => {
+  const logger = (process.env.LOGGER || "").toLowerCase();
+  if (logger === "morgan") 
     return morganLogger;
-  }
+  // no-op логгер по умолчанию (чтобы app.use(...) не падал)
+  return (req, res, next) => next();
 };
-
-module.exports = loggerMiddleware;
