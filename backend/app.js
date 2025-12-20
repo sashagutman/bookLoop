@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const express = require("express");
 const chalk = require("chalk");
-const morgan = require("morgan");
 
 const corsMiddleware = require("./middlewares/cors");
 const router = require("./router/router");
@@ -13,15 +12,10 @@ const { handleError } = require("./utils/handleErrors");
 const app = express();
 const PORT = process.env.PORT || 5566;
 
-// ── core middlewares
 app.use(express.json());
 app.use(corsMiddleware);
+app.use(loggerMiddleware);
 
-const lm = loggerMiddleware && loggerMiddleware();
-if (typeof lm === "function") app.use(lm);
-else app.use(morgan("dev"));
-
-// ── api
 app.use("/api", router);
 
 app.use((err, req, res, next) => {

@@ -1,10 +1,15 @@
 const morganLogger = require("./morgan/morganLogger");
 
-// безопасная фабрика: ВСЕГДА возвращает функцию
-module.exports = () => {
+// экспортируем middleware, а не фабрику
+module.exports = function loggerMiddleware(req, res, next) {
   const logger = (process.env.LOGGER || "").toLowerCase();
-  if (logger === "morgan") 
-    return morganLogger;
-  // no-op логгер по умолчанию (чтобы app.use(...) не падал)
-  return (req, res, next) => next();
+
+  if (logger === "morgan") {
+    return morganLogger(req, res, next);
+  }
+
+  return next();
 };
+
+
+

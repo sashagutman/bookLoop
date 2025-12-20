@@ -40,7 +40,6 @@ const morganLogger = morgan((tokens, req, res) => {
     }
     return chalk.redBright(msg);
   }
-
   // 2xx/3xx — в stdout
   return chalk.cyanBright(msg);
 });
