@@ -13,9 +13,7 @@ const bookSchema = new mongoose.Schema(
     publishedYear: { type: Number, min: 0, max: new Date().getFullYear() },
     rating: { type: Number, min: 0, max: 5, default: 0 },   
     notes: { type: String, trim: true, default: "" },  
-    readYear: { type: Number, min: 0, max: new Date().getFullYear(),
-  },
-
+    readYear: { type: Number, min: 0, max: new Date().getFullYear() },
     likes: [{ type: String }],     
     wants: [{ type: String }], 
     states: [
