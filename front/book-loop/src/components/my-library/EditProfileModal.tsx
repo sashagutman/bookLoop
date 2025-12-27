@@ -22,7 +22,6 @@ const EditProfileModal: FunctionComponent<Props> = ({ open, onClose, user, onUpd
     onSubmitProfile,
     onSubmitPassword,
   } = useEditProfile({ open, user, onClose, onUpdated });
-
   if (!open) return null;
 
   return (

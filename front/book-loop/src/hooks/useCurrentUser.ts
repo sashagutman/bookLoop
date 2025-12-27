@@ -18,6 +18,9 @@ export function useCurrentUser(enabled = true) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(!!enabled);
   const [error, setError] = useState<unknown>(null);
+  const [reloadKey, setReloadKey] = useState(0);
+
+  const refetch = () => setReloadKey((k) => k + 1);
 
   useEffect(() => {
     let alive = true;
@@ -30,8 +33,8 @@ export function useCurrentUser(enabled = true) {
 
       try {
         setLoading(true); setError(null);
-        const res = await getMe();              
-        const u = normalizeUser(res?.data);
+        const res = await getMe();
+        const u = normalizeUser(res);
         if (alive) setUser(u);
       } catch (e) {
         if (alive) { setError(e); setUser(null); }
@@ -41,7 +44,8 @@ export function useCurrentUser(enabled = true) {
     })();
 
     return () => { alive = false; };
-  }, [enabled]);
+  }, [enabled, reloadKey]); 
 
-  return { user, loading, error };
+  return { user, loading, error, refetch, setUser };
 }
+

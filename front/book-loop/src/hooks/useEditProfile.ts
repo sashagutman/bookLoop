@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { updateMe, updateMyPassword } from "../services/userService";
+import { getMe, updateMe, updateMyPassword } from "../services/userService";
 import type { User } from "../interfaces/users/User";
 
 export type ProfileForm = {
@@ -85,8 +85,9 @@ export function useEditProfile({ open, user, onClose, onUpdated }: UseEditProfil
         : undefined,
     };
     try {
-      const updatedUser = await updateMe(payload);
-      onUpdated(updatedUser);
+      await updateMe(payload);
+      const freshUser = await getMe();
+      onUpdated(freshUser);
       toast.success("Profile updated");
       onClose();
     } catch (e: any) {
