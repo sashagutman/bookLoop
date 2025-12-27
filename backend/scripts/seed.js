@@ -40,11 +40,11 @@ async function seed() {
     console.log("Cleared Users and Books (SEED_RESET=true)");
   }
 
-  // Пароль должен проходить твой PASSWORD_REGEX
+  // пароль должен проходить PASSWORD_REGEX
   const plainPassword = "1qazxsw2!Q";
   const hashedPassword = await bcrypt.hash(plainPassword, 10);
 
-  // --- Users
+  // users
   const usersData = [
     {
       name: { first: "User", middle: "", last: "Test" },
@@ -61,7 +61,7 @@ async function seed() {
       password: hashedPassword,
       country: "Israel",
       city: "Jerusalem",
-      image: { url: "https://picsum.photos/200", alt: "User avatar" },
+      image: { url: "https://picsum.photos/200", alt: "Admin avatar" },
       isAdmin: true,
     },
   ];
@@ -76,7 +76,7 @@ async function seed() {
   const [testUser, adminUser] = users;
   console.log(`Users ready: ${users.map(u => u.email).join(", ")}`);
 
-  // --- Books
+  // books
   const booksData = [
     {
       user_id: testUser._id,
@@ -107,7 +107,7 @@ async function seed() {
       publishedYear: 1945,
       rating: 5,
       notes: "",
-      readYear: null,
+      readYear: 2020,
       likes: [],
       wants: [testUser._id.toString()],
       states: [{ user: testUser._id, status: "reading" }],
@@ -124,7 +124,7 @@ async function seed() {
       publishedYear: 1949,
       rating: 5,
       notes: "",
-      readYear: null,
+      readYear: 2021,
       likes: [testUser._id.toString()],
       wants: [],
       states: [{ user: testUser._id, status: "unread" }],

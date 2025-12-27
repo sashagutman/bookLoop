@@ -22,12 +22,11 @@ book-loop/
    bash
 cd backend
 cp .env.example .env    # copy the template
-# open .env and set your Mongo URI and JWT secret if needed
+# open .env and set Mongo URI and JWT secret if needed
 npm install
 npm run dev             # API at http://localhost:5566
 
-**`backend/.env.example`** (already provided):
-   dotenv
+
 # === Security / Auth ===
 JWT_SECRET=random_secret
 JWT_EXPIRES_IN=1h
@@ -37,7 +36,7 @@ PORT=5566
 NODE_ENV=development
 
 # === Database ===
-# Local MongoDB (from your env):
+# Local MongoDB:
 MONGODB_URI=mongodb://127.0.0.1:27017/fullstack-library
 
 # MongoDB Atlas (template — replace with your own credentials/cluster/db):
@@ -50,6 +49,25 @@ VALIDATOR=Joi
 
 # === CORS for local dev (frontend URL) ===
 CORS_ORIGIN=http://localhost:5173
+
+### Seed data (optional)
+To quickly populate a clean MongoDB with test users + books:
+
+1. In `backend/.env` add:
+
+SEED=true
+SEED_RESET=true
+
+2. Run:
+cd backend
+npm run seed
+
+Seed credentials:
+   user-test12@gmail.com / 1qazxsw2!Q
+   user-admin13@gmail.com / 1qazxsw2!Q
+
+ After the first run, remove SEED_RESET=true to avoid wiping existing data.
+
 
 
 **Backend scripts (package.json):**
