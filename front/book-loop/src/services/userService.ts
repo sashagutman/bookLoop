@@ -10,7 +10,7 @@ export async function getMe() {
 }
 export async function updateMe(updateUser: Partial<User>) {
   const { data } = await apiUsers.put<User>("/me", updateUser);
-  return data;
+  return (data && (data as any).user) ? (data as any).user as User : data as User;
 }
 export function deleteMe() {
   return apiUsers.delete("/me");
