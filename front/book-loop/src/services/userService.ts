@@ -4,11 +4,13 @@ import { setToken, removeToken } from "./tokenService";
 import { apiUsers } from "./api";
 
 // self
-export function getMe() {
-  return apiUsers.get("/me");
+export async function getMe() {
+  const { data } = await apiUsers.get<User>("/me");
+  return data;
 }
-export function updateMe(updateUser: Partial<User>) {
-  return apiUsers.put<User>("/me", updateUser);
+export async function updateMe(updateUser: Partial<User>) {
+  const { data } = await apiUsers.put<User>("/me", updateUser);
+  return data;
 }
 export function deleteMe() {
   return apiUsers.delete("/me");

@@ -47,14 +47,14 @@ const UserDetailsPage: FunctionComponent = () => {
       setError(null);
       try {
         const res = isSelf ? await getMe() : await getUserById(resourceId);
-        const data = normalize(res?.data as unknown);
+        const data = isSelf ? normalize(res) : normalize((res as any)?.data);
         if (!ignore) setUser(data);
       } catch (e: any) {
         const status = e?.response?.status;
         if (status === 401 && !isSelf) {
           try {
             const meRes = await getMe();
-            const meData = normalize(meRes?.data as unknown);
+            const meData = normalize(meRes as unknown);
             if (!ignore) setUser(meData);
           } catch (e2: any) {
             if (e2?.response?.status === 401) {
@@ -185,7 +185,7 @@ const UserDetailsPage: FunctionComponent = () => {
       </div>
 
       {showEdit && user && (
-        <EditProfileModal open={showEdit} onClose={() => setShowEdit(false)} user={user} />
+        <EditProfileModal open={showEdit} onClose={() => setShowEdit(false)} user={user} onUpdated={setUser} />
       )}
     </section>
   );

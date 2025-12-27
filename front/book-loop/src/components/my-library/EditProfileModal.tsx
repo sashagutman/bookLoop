@@ -7,9 +7,10 @@ type Props = {
   open: boolean;
   onClose: () => void;
   user: User;
+  onUpdated: (u: User) => void;
 };
 
-const EditProfileModal: FunctionComponent<Props> = ({ open, onClose, user }) => {
+const EditProfileModal: FunctionComponent<Props> = ({ open, onClose, user, onUpdated }) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +21,7 @@ const EditProfileModal: FunctionComponent<Props> = ({ open, onClose, user }) => 
     isSubmittingPwd,
     onSubmitProfile,
     onSubmitPassword,
-  } = useEditProfile({ open, user, onClose });
+  } = useEditProfile({ open, user, onClose, onUpdated });
 
   if (!open) return null;
 

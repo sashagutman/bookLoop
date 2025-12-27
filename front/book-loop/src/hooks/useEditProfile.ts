@@ -21,9 +21,10 @@ type UseEditProfileArgs = {
   open: boolean;
   user: User;
   onClose: () => void;
+  onUpdated: (u: User) => void;
 };
 
-export function useEditProfile({ open, user, onClose }: UseEditProfileArgs) {
+export function useEditProfile({ open, user, onClose, onUpdated }: UseEditProfileArgs) {
   // Профиль
   const {
     register,
@@ -84,7 +85,8 @@ export function useEditProfile({ open, user, onClose }: UseEditProfileArgs) {
         : undefined,
     };
     try {
-      await updateMe(payload);
+      const updatedUser = await updateMe(payload);
+      onUpdated(updatedUser);
       toast.success("Profile updated");
       onClose();
     } catch (e: any) {
