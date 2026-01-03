@@ -18,6 +18,12 @@ app.use(loggerMiddleware);
 
 app.use("/api", router);
 
+// Disable caching for API responses
+app.use("/api", (req, res, next) => {
+  res.setHeader("Cache-Control", "no-cache");
+  next();
+});
+
 app.use((err, req, res, next) => {
   console.error(err);
   return handleError(res, 500, "Internal Server Error");
