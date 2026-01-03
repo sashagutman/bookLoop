@@ -10,6 +10,11 @@
     flex-wrap: wrap;
 }
 
+.btn-search-reset{
+    width: 80px;
+    height: 57px;
+}
+
 .filter-btn_reset{
     background-color: transparent;
     border: 1px solid rgb(51, 51, 51);

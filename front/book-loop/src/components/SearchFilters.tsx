@@ -75,7 +75,7 @@ const SearchFilters: FunctionComponent<SearchFiltersProps> = ({
               <div className="filters-actions">
                 <button
                   type="button"
-                  className="btn-flip"
+                  className="btn-flip btn-search-reset"
                   onClick={onReset}
                   disabled={!hasActive}
                   title="Reset filters"
