@@ -1,7 +1,7 @@
 body.dark .header,
 body.dark .footer{
-    background-color: rgb(228, 235, 242);
-    border-bottom: 1px solid rgb(200, 200, 200);
+    background-color: rgb(238, 241, 245, 0.97);
+    border-bottom: 1px solid rgb(200, 200, 200, 0.3);
 }
 
 body.dark .header-nav-link,
