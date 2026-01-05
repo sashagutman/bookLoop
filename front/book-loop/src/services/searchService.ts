@@ -37,14 +37,19 @@ export type BookSearchParams = {
   lang?: string;
 };
 
-export async function searchBooks(params: BookSearchParams): Promise<Book[]> {
+// добавление signal вторым параметром
+export async function searchBooks(
+  params: BookSearchParams,
+  signal?: AbortSignal
+): Promise<Book[]> {
   const qp = cleanParams({
     ...params,
     genre: mapGenre(params.genre),
     lang: params.lang ?? params.language,
   });
 
-  const { data } = await apiBooks.get("/", { params: qp });
+  //прокидаем signal в axios
+  const { data } = await apiBooks.get("/", { params: qp, signal });
 
   if (Array.isArray(data)) return data as Book[];
 

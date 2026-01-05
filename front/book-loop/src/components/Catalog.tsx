@@ -36,8 +36,12 @@ const Catalog: FunctionComponent = () => {
     setBooks,
   });
 
-  const totalCount = Number.isFinite(total) ? total : 0;
-  const isEmpty = !loading && totalCount === 0;
+  // const totalCount = Number.isFinite(total) ? total : 0;
+  // const isEmpty = !loading && totalCount === 0;
+
+  const totalCount = Number.isFinite(total) && total > 0 ? total : books.length;
+  const isEmpty = !loading && books.length === 0;
+
 
   return (
     <section id="catalog" className="catalog-section">
