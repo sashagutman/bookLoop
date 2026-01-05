@@ -1,6 +1,5 @@
 .details-section {
     padding: clamp(3.125rem, 2.105rem + 5.1vw, 6.25rem) 0;
-    height: 100vh;
 }
 
 .details-inner {
