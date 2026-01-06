@@ -85,6 +85,26 @@ export async function showBookNotesModal(title: string, notes: string): Promise<
   });
 }
 
+// модал ошибки загрузки списка книг
+export async function booksLoadErrorModal(message?: string): Promise<"retry" | "reload" | "cancel"> {
+  const res = await Swal.fire({
+    title: "Problem loading books",
+    text: message || "Couldn’t load the library. Try again?",
+    icon: "error",
+    showCancelButton: true,
+    showDenyButton: true,
+    confirmButtonText: "Retry",
+    denyButtonText: "Reload page",
+    cancelButtonText: "Cancel",
+    reverseButtons: true,
+    focusConfirm: true,
+  });
+
+  if (res.isConfirmed) return "retry";
+  if (res.isDenied) return "reload";
+  return "cancel";
+}
+
 // экранирование HTML в заметках
 function escapeHtml(s: string) {
   return s
