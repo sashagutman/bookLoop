@@ -9,8 +9,8 @@ const authHeaders = () => ({
 });
 
 // list (публичный)
-export function getAllBooks() {
-  return apiBooks.get<Book[]>("/");
+export function getAllBooks(signal?: AbortSignal) {
+  return apiBooks.get<Book[]>("/", {signal});
 }
 
 // create book
