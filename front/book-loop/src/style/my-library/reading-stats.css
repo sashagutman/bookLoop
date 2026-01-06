@@ -1,5 +1,5 @@
 .stats {
-    background-color: rgba(10, 16, 30, 0.9);
+    /* background-color: rgba(10, 16, 30, 0.9); */
     padding: clamp(3.125rem, 2.105rem + 5.1vw, 6.25rem) 0;
 }
 
