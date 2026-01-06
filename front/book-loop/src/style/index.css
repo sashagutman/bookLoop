@@ -94,4 +94,5 @@ table {
 
 .content {
     flex-grow: 1;
+    background-color: #0a101ee6;
 }
