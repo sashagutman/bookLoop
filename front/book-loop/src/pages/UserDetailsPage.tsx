@@ -123,7 +123,7 @@ const UserDetailsPage: FunctionComponent = () => {
   const updatedAt = safeLocaleDate(user.updatedAt);
 
   return (
-    <section className="details-section section-bg">
+    <section className="details-section">
       <div className="container">
         <h1 className="details-title title-h">{fullName}</h1>
 
