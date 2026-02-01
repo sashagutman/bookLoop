@@ -85,7 +85,7 @@ const MyBooksPage: FunctionComponent<MyBooksPageProps> = () => {
 
 return (
     <>
-        <section className="my-books section-bg">
+        <section className="my-books">
                 <div className="container">
                     <h2 className="title-h">My Books</h2>
                     <p className="text-p">Manage your personal book collection</p>
