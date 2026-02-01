@@ -97,7 +97,7 @@ const BookDetailsPage: FunctionComponent = () => {
   };
 
   return (
-    <section className="details-section section-bg">
+    <section className="details-section">
       <div className="container">
         {showLoader ? (
           <Loading />
