@@ -33,8 +33,11 @@ router.post("/", auth, async (req, res) => {
   if (req.body && typeof req.body.language !== "undefined") {
     req.body.language = normalizeLanguage(req.body.language);
   }
-  const msg = bookValidation(req.body);
-  if (msg) return res.status(400).json(createError("Validation", msg, 400));
+  
+  const v = bookValidation(req.body);
+  if(v) {
+    return res.status(400).json(createError("Validation", v.message, 400, v.details));
+  }
 
   try {
     const normalized = normalizeBook(req.body, req.user._id);
@@ -163,8 +166,10 @@ router.put("/:id", auth, ownerOrAdmin(Book), async (req, res) => {
     req.body.language = normalizeLanguage(req.body.language);
   }
   
-  const msg = bookValidation(req.body);
-  if (msg) return res.status(400).json(createError("Validation", msg, 400));
+  const v = bookValidation(req.body);
+  if(v) {
+    return res.status(400).json(createError("Validation", v.message, 400, v.details));
+  }
 
   try {
     const { id } = req.params;
