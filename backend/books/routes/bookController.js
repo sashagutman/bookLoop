@@ -23,7 +23,7 @@ const {
 
 const normalizeBook = require("../helpers/normalizeBook");
 const bookValidation = require("../validation/bookValidationService");
-const { handleError, createError } = require("../../utils/handleErrors");
+const { handleError, createError, errorToResponse } = require("../../utils/handleErrors");
 const { normalizeLanguage } = require("../helpers/normalizeLanguage");
 
 const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
@@ -36,7 +36,8 @@ router.post("/", auth, async (req, res) => {
   
   const v = bookValidation(req.body);
   if(v) {
-    return res.status(400).json(createError("Validation", v.message, 400, v.details));
+    const err = createError("Validation", v.message, 400, v.details);
+    return res.status(400).json(errorToResponse(err));
   }
 
   try {
@@ -168,7 +169,8 @@ router.put("/:id", auth, ownerOrAdmin(Book), async (req, res) => {
   
   const v = bookValidation(req.body);
   if(v) {
-    return res.status(400).json(createError("Validation", v.message, 400, v.details));
+    const err = createError("Validation", v.message, 400, v.details);
+    return res.status(400).json(errorToResponse(err));
   }
 
   try {

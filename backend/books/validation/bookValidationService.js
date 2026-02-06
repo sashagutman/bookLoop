@@ -3,7 +3,6 @@ const bookValidate = require("./Joi/bookValidate");
 const validator = process.env.VALIDATOR
 
 const bookValidation = (book) => {
-  if (validator !== "Joi") return null;
 
   const { error, value } = bookValidate.validate(book, {
     abortEarly: true,   // первая ошибка 
