@@ -12,7 +12,7 @@ A full-stack web app for tracking reading and managing a personal library.
 - **Frontend:** https://bookloop-staging-1.onrender.com  
 - **Backend API:** https://bookloop-staging.onrender.com  
 
-**Test users (seed):**
+**Test users (available on the live demo):**
 - `user-test12@gmail.com` / `1qazxsw2!Q`
 - `user-admin13@gmail.com` / `1qazxsw2!Q`
 
@@ -84,30 +84,15 @@ SEED_RESET=false
 
 ---
 
-### Seed data (optional)
+### Seed data (local)
 
 To quickly populate a clean MongoDB with test users + books:
-
-1) In `backend/.env` set:
-
-```dotenv
-SEED=true
-SEED_RESET=true
-```
-
-2) Run:
 
 ```bash
 cd backend
 npm run seed
 ```
-
-After the first run, set `SEED_RESET=false` to avoid wiping existing data:
-
-```dotenv
-SEED=false
-SEED_RESET=false
-```
+Local-only: clears Users + Books and recreates seed data (protected from running in production).
 
 Seed credentials:
 - `user-test12@gmail.com` / `1qazxsw2!Q`

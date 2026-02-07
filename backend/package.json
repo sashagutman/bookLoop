@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node scripts/seed.js"
+    "seed": "cross-env SEED=true SEED_RESET=true node scripts/seed.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -23,6 +23,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "nodemon": "^3.1.10"
   }
 }
