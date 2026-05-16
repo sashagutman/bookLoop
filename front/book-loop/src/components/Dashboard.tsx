@@ -36,11 +36,7 @@ const Dashboard: FunctionComponent = () => {
           ) : error ? (
             <div className="dashboard-error">
               <p className="dashboard-error-title">Problem loading dashboard stats</p>
-              <p className="dashboard-error-message">
-                {error}
-              </p>
-
-              <button className="btn dashboard-error-btn" style={{ marginTop: 12 }} onClick={refetch}>
+              <button className="btn dashboard-error-btn" onClick={refetch}>
                 Retry
               </button>
             </div>
