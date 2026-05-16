@@ -102,22 +102,15 @@
 .dashboard-error {
   max-width: 420px;
   width: 100%;
-
   margin: 60px auto;
   padding: 32px 24px;
-
   position: relative;
   overflow: hidden;
-
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 18px;
-
   text-align: center;
-
   border-radius: 24px;
-
   background: linear-gradient(
     135deg,
     rgba(255, 245, 245, 0.95),
@@ -135,51 +128,25 @@
 
 .dashboard-error::before {
   content: "";
-
   position: absolute;
   top: -80px;
   right: -80px;
-
   width: 180px;
   height: 180px;
-
   border-radius: 50%;
-
   background: rgba(239, 68, 68, 0.08);
-}
-
-.dashboard-error::after {
-  content: "⚠";
-
-  position: absolute;
-  top: 18px;
-  left: 20px;
-
-  font-size: 1.2rem;
-  opacity: 0.7;
 }
 
 .dashboard-error-title {
   position: relative;
   z-index: 1;
-
   font-size: clamp(1.15rem, 2vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.4;
-
   color: #991b1b;
 }
 
 .dashboard-error-btn {
   position: relative;
   z-index: 1;
-
-  min-width: 150px;
-  padding: 12px 20px;
-
-  border: none;
-  border-radius: 12px;
-
   background: linear-gradient(
     135deg,
     #ef4444,
@@ -188,21 +155,16 @@
 
   color: white;
   font-weight: 600;
-
-  cursor: pointer;
-
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     opacity 0.2s ease;
-
   box-shadow:
     0 10px 20px rgba(220, 38, 38, 0.2);
 }
 
 .dashboard-error-btn:hover {
   transform: translateY(-2px);
-
   box-shadow:
     0 14px 28px rgba(220, 38, 38, 0.28);
 }
