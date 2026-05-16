@@ -90,6 +90,10 @@ const Catalog: FunctionComponent = () => {
               <GrBook />
             </div>
             <p className="catalog-empty_title">Problem loading books.  Please reload the page and try again.</p>
+            <button className="btn catalog-reload-btn"
+                    onClick={() => window.location.reload()}>
+                    Reload page
+            </button>
           </div>
         ) : isEmpty ? (
           <div className="catalog-empty">
