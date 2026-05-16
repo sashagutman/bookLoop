@@ -75,3 +75,9 @@
     font-size: 13px;
     color: rgb(148, 163, 184);
 }
+
+@media (max-width: 445px) {
+    .stats-cards {
+        width: min(140px, 100%);
+    }
+}
