@@ -89,17 +89,7 @@ const Catalog: FunctionComponent = () => {
             <div className="catalog-empty_icon">
               <GrBook />
             </div>
-            <p className="catalog-empty_title">Problem loading books</p>
-            <p style={{ opacity: 0.75, marginTop: 8, maxWidth: 720 }}>{error}</p>
-
-            <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-              <button className="btn" onClick={() => refetch()}>
-                Retry
-              </button>
-              <button className="btn btn--ghost" onClick={() => window.location.reload()}>
-                Reload page
-              </button>
-            </div>
+            <p className="catalog-empty_title">Problem loading books.  Please reload the page and try again.</p>
           </div>
         ) : isEmpty ? (
           <div className="catalog-empty">
