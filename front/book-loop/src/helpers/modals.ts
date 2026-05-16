@@ -86,10 +86,10 @@ export async function showBookNotesModal(title: string, notes: string): Promise<
 }
 
 // модал ошибки загрузки списка книг
-export async function booksLoadErrorModal(message?: string): Promise<"retry" | "reload" | "cancel"> {
+export async function booksLoadErrorModal(): Promise<"retry" | "reload" | "cancel"> {
   const res = await Swal.fire({
     title: "Problem loading books",
-    text: message || "Couldn’t load the library. Try again?",
+    text: "Something went wrong while loading the library. Please try again or reload the page.",
     icon: "error",
     showCancelButton: true,
     showDenyButton: true,

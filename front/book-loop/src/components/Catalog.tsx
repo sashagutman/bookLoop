@@ -60,7 +60,7 @@ const Catalog: FunctionComponent = () => {
     shownErrorRef.current = true;
 
     (async () => {
-      const action = await booksLoadErrorModal(error);
+      const action = await booksLoadErrorModal();
       if (action === "retry") refetch();
       if (action === "reload") window.location.reload();
     })();
