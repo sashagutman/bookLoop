@@ -104,36 +104,39 @@
   width: 100%;
   margin: 40px auto;
   padding: 28px 24px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-radius: 20px;
 
-  background: rgba(239, 219, 219, 0.9);
-  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 18px;
+  background: #fff7f7;
+  border: 1px solid #fecaca;
 
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 28px rgba(127, 29, 29, 0.08);
 }
 
 .dashboard-error-title {
   margin-bottom: 10px;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
   font-weight: 700;
-  color: #ffffff;
+  color: #991b1b;
 }
 
 .dashboard-error-message {
   max-width: 420px;
   font-size: 0.95rem;
-  color: #6b7280;
+  color: #7f1d1d;
   word-break: break-word;
 }
 
 .dashboard-error-btn {
-  margin-top: 14px;
-  min-width: 140px;
-  background-color: #2564ebaf;
+  margin-top: 16px;
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.dashboard-error-btn:hover {
+  background-color: #b91c1c;
 }
