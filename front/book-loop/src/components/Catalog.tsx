@@ -15,7 +15,7 @@ import { useBookActions } from "../hooks/useBookActions";
 import BookCard from "./BookCard";
 import { booksLoadErrorModal } from "../helpers/modals";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 10;
 
 const Catalog: FunctionComponent = () => {
   const { user: decoded, isAuthenticated } = useAuth();
